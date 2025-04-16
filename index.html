@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amina Saleh | UI/UX Designer</title>
+    <meta name="description" content="Amina Saleh is a freelance UI/UX designer based in Cairo, Egypt with 5+ years of experience creating elegant and user-focused digital experiences.">
+    <!-- Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --peach: #FFDAB9;
+            --cream: #FFF8DC;
+            --lavender: #E6E6FA;
+            --dark-text: #333333;
+            --light-text: #F8F9FA;
+            --transition-speed: 0.5s;
+        }
+        
+        .dark {
+            --peach: #C89F81;
+            --cream: #34322E;
+            --lavender: #524C76;
+            --dark-text: #F8F9FA;
+            --light-text: #333333;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            transition: background-color var(--transition-speed), color var(--transition-speed);
+            background-color: var(--cream);
+            color: var(--dark-text);
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .section {
+            padding: 4rem 0;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .peach-bg {
+            background-color: var(--peach);
+        }
+        
+        .lavender-bg {
+            background-color: var(--lavender);
+        }
+        
+        .cream-bg {
+            background-color: var(--cream);
+        }
+        
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            cursor: pointer;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .btn-primary {
+            background-color: var(--peach);
+            color: var(--dark-text);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .nav-link {
+            position: relative;
+            padding: 0.5rem;
+            margin: 0 0.5rem;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--peach);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .card {
+            border-radius: 1rem;
+            overflow: hidden;
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+            background-color: rgba(255, 255, 255, 0.7);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .dark .card {
+            background-color: rgba(30, 30, 30, 0.7);
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .skill-pill {
+            background-color: var(--lavender);
+            border-radius: 9999px;
+            padding: 0.5rem 1rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+        
+        .skill-pill:hover {
+            transform: translateY(-5px);
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background-color: var(--peach);
+            border-radius: 5px;
+            transition: width 1.5s ease-in-out;
+        }
+        
+        .social-icon {
+            font-size: 1.5rem;
+            margin: 0 0.5rem;
+            transition: transform 0.3s ease, color 0.3s ease;
+            color: var(--dark-text);
+        }
+        
+        .social-icon:hover {
+            transform: scale(1.2) rotate(5deg);
+            color: var(--peach);
+        }
+        
+        .hero-content {
+            animation: fadeIn 1s ease-out;
+        }
+        
+        .profile-img {
+            border-radius: 50%;
+            border: 5px solid var(--peach);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            transition: transform 0.5s ease;
+        }
+        
+        .profile-img:hover {
+            transform: scale(1.05);
+        }
+        
+        #theme-toggle {
+            position: fixed;
+            right: 2rem;
+            bottom: 2rem;
+            z-index: 100;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            background-color: var(--peach);
+            color: var(--dark-text);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        
+        #theme-toggle:hover {
+            transform: rotate(30deg);
+        }
+        
+        /* Fix for dark mode text visibility */
+        .dark .text-gray-700 {
+            color: #e0e0e0 !important;
+        }
+        
+        .dark .text-blue-800 {
+            color: #90caf9 !important;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes floatAnimation {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+        
+        .float-animation {
+            animation: floatAnimation 5s ease-in-out infinite;
+        }
+        
+        /* For PDF export optimization */
+        @media print {
+            body {
+                width: 100%;
+                margin: 0;
+                padding: 0;
+                background-color: white !important;
+                color: black !important;
+            }
+            
+            .section {
+                opacity: 1 !important;
+                transform: none !important;
+                display: block !important;
+            }
+            
+            #theme-toggle {
+                display: none !important;
+            }
+            
+            /* Ensure all content is visible */
+            .hidden, .lg\:hidden {
+                display: block !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Theme Toggle Button -->
+    <div id="theme-toggle" onclick="toggleTheme()">
+        <i class="fas fa-moon dark:hidden"></i>
+        <i class="fas fa-sun hidden dark:block"></i>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 shadow-md cream-bg py-4 transition-all duration-300" id="navbar">
+        <div class="container mx-auto px-4 md:px-6 flex justify-between items-center">
+            <div class="text-2xl font-semibold">
+                <span class="text-3xl">Amina</span> 
+                <span class="text-2xl" style="color: var(--peach);">Saleh</span>
+            </div>
+            <div class="hidden md:flex items-center space-x-1">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="#portfolio" class="nav-link">Portfolio</a>
+                <a href="#blog" class="nav-link">Blog</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+            <div class="md:hidden flex items-center">
+                <button id="mobile-menu-button" class="focus:outline-none">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden hidden cream-bg py-4 shadow-inner animate__animated animate__fadeIn">
+            <div class="container mx-auto px-4 flex flex-col space-y-3">
+                <a href="#home" class="nav-link block py-2">Home</a>
+                <a href="#about" class="nav-link block py-2">About</a>
+                <a href="#skills" class="nav-link block py-2">Skills</a>
+                <a href="#portfolio" class="nav-link block py-2">Portfolio</a>
+                <a href="#blog" class="nav-link block py-2">Blog</a>
+                <a href="#contact" class="nav-link block py-2">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center cream-bg pt-24 section">
+        <div class="container mx-auto px-4 md:px-6">
+            <div class="flex flex-col md:flex-row items-center justify-between">
+                <div class="md:w-1/2 hero-content">
+                    <h1 class="text-4xl md:text-6xl font-bold mb-4">Hello, I'm <span style="color: var(--peach);">Amina Saleh</span></h1>
+                    <h2 class="text-2xl md:text-3xl mb-6">Freelance UI/UX Designer</h2>
+                    <p class="text-lg mb-8">Based in Cairo, Egypt, I create elegant and user-focused digital experiences.</p>
+                    <div class="flex space-x-4">
+                        <a href="#portfolio" class="btn btn-primary">View Portfolio</a>
+                        <a href="#contact" class="btn border-2" style="border-color: var(--peach);">Contact Me</a>
+                    </div>
+                </div>
+                <div class="md:w-1/2 mt-12 md:mt-0 flex justify-center">
+                    <div class="relative">
+                        <div class="absolute inset-0 bg-gradient-to-br from-pink-200 to-purple-200 rounded-full blur-lg opacity-70 float-animation"></div>
+                        <img src="https://page.genspark.site/v1/base64_upload/88594751004d69d333ffcfef034e5366" alt="Amina Saleh" class="profile-img w-64 h-64 md:w-80 md:h-80 object-cover relative z-10">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 lavender-bg section">
+        <div class="container mx-auto px-4 md:px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold mb-2">About Me</h2>
+                <div class="w-24 h-1 bg-peach mx-auto"></div>
+            </div>
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 md:pr-12 mb-8 md:mb-0">
+                    <p class="text-lg mb-6">
+                        I'm a passionate UI/UX designer with 5+ years of experience creating elegant and user-focused digital experiences. I believe in the power of clean design and intuitive interfaces.
+                    </p>
+                    <p class="text-lg mb-6">
+                        My design philosophy centers around creating experiences that feel both beautiful and intuitive. Every pixel, animation, and interaction serves a purpose in guiding users through their journey.
+                    </p>
+                    <p class="text-lg mb-6">
+                        When I'm not designing, you'll find me exploring Cairo's vibrant art scene, photographing urban architecture, or experimenting with traditional Egyptian patterns in my personal design projects.
+                    </p>
+                    <div class="flex items-center space-x-4 mt-8">
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-behance"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-dribbble"></i></a>
+                    </div>
+                </div>
+                <div class="md:w-1/2">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow cream-bg">
+                            <div class="text-4xl mb-4" style="color: var(--peach);"><i class="fas fa-paint-brush"></i></div>
+                            <h3 class="text-xl font-semibold mb-2">UI Design</h3>
+                            <p>Creating beautiful, intuitive interfaces that delight users.</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow cream-bg">
+                            <div class="text-4xl mb-4" style="color: var(--peach);"><i class="fas fa-users"></i></div>
+                            <h3 class="text-xl font-semibold mb-2">UX Research</h3>
+                            <p>Deep understanding of user needs through research and testing.</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow cream-bg">
+                            <div class="text-4xl mb-4" style="color: var(--peach);"><i class="fas fa-laptop-code"></i></div>
+                            <h3 class="text-xl font-semibold mb-2">Prototyping</h3>
+                            <p>Bringing ideas to life with interactive prototypes.</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow cream-bg">
+                            <div class="text-4xl mb-4" style="color: var(--peach);"><i class="fas fa-cubes"></i></div>
+                            <h3 class="text-xl font-semibold mb-2">Design Systems</h3>
+                            <p>Building scalable and consistent design systems.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 cream-bg section">
+        <div class="container mx-auto px-4 md:px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold mb-2">My Skills</h2>
+                <div class="w-24 h-1 bg-peach mx-auto"></div>
+            </div>
+            <div class="flex flex-col md:flex-row">
+                <div class="md:w-1/2 mb-8 md:mb-0 md:pr-8">
+                    <div class="mb-6">
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium">Figma</span>
+                            <span>95%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 95%"></div>
+                        </div>
+                    </div>
+                    <div class="mb-6">
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium">Adobe XD</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 90%"></div>
+                        </div>
+                    </div>
+                    <div class="mb-6">
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium">HTML/CSS</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    <div class="mb-6">
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium">Webflow</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 80%"></div>
+                        </div>
+                    </div>
+                    <div class="mb-6">
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium">User Research</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    <div class="mb-6">
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium">Design Systems</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 90%"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:w-1/2 md:pl-8">
+                    <div class="bg-white p-6 rounded-lg shadow-lg cream-bg">
+                        <h3 class="text-xl font-semibold mb-4">Design Tools & Technologies</h3>
+                        <div class="flex flex-wrap">
+                            <span class="skill-pill"><i class="fab fa-figma mr-2"></i>Figma</span>
+                            <span class="skill-pill"><i class="fab fa-adobe mr-2"></i>Adobe XD</span>
+                            <span class="skill-pill"><i class="fab fa-sketch mr-2"></i>Sketch</span>
+                            <span class="skill-pill"><i class="fab fa-html5 mr-2"></i>HTML5</span>
+                            <span class="skill-pill"><i class="fab fa-css3-alt mr-2"></i>CSS3</span>
+                            <span class="skill-pill"><i class="fab fa-js-square mr-2"></i>JavaScript</span>
+                            <span class="skill-pill"><i class="fab fa-react mr-2"></i>React</span>
+                            <span class="skill-pill"><i class="fas fa-mobile-alt mr-2"></i>Responsive Design</span>
+                            <span class="skill-pill"><i class="fas fa-universal-access mr-2"></i>Accessibility</span>
+                            <span class="skill-pill"><i class="fas fa-pencil-ruler mr-2"></i>Prototyping</span>
+                            <span class="skill-pill"><i class="fas fa-palette mr-2"></i>Color Theory</span>
+                            <span class="skill-pill"><i class="fas fa-font mr-2"></i>Typography</span>
+                            <span class="skill-pill"><i class="fas fa-sitemap mr-2"></i>Information Architecture</span>
+                            <span class="skill-pill"><i class="fas fa-user-friends mr-2"></i>User Testing</span>
+                            <span class="skill-pill"><i class="fas fa-photo-video mr-2"></i>Motion Design</span>
+                        </div>
+                        
+                        <h3 class="text-xl font-semibold mb-4 mt-8">Languages</h3>
+                        <div class="flex flex-wrap">
+                            <span class="skill-pill"><i class="fas fa-language mr-2"></i>Arabic (Native)</span>
+                            <span class="skill-pill"><i class="fas fa-language mr-2"></i>English (Fluent)</span>
+                            <span class="skill-pill"><i class="fas fa-language mr-2"></i>French (Intermediate)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-20 peach-bg section">
+        <div class="container mx-auto px-4 md:px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold mb-2">My Portfolio</h2>
+                <div class="w-24 h-1 bg-white mx-auto"></div>
+                <p class="mt-4 text-lg">Here are some of my recent projects</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Project 1 - EcoTrack -->
+                <div class="card overflow-hidden bg-white shadow-lg">
+                    <div class="relative overflow-hidden h-64">
+                        <img src="https://page.genspark.site/v1/base64_upload/6aad426606a7ba722a3786621c4597c3" alt="EcoTrack App" class="object-cover w-full h-full transition-transform duration-500 hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">EcoTrack</h3>
+                        <p class="text-gray-700 mb-4">An app for tracking carbon footprints with sleek green-themed UI.</p>
+                        <div class="flex flex-wrap mb-4">
+                            <span class="bg-green-100 text-green-800 text-xs font-medium mr-2 mb-2 px-2.5 py-0.5 rounded">UI Design</span>
+                            <span class="bg-green-100 text-green-800 text-xs font-medium mr-2 mb-2 px-2.5 py-0.5 rounded">Mobile App</span>
+                            <span class="bg-green-100 text-green-800 text-xs font-medium mr-2 mb-2 px-2.5 py-0.5 rounded">Figma</span>
+                        </div>
+                        <a href="#" class="text-sm font-medium inline-flex items-center hover:underline" style="color: var(--peach);">
+                            View Case Study
+                            <svg class="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 2 - Zahara -->
+                <div class="card overflow-hidden bg-white shadow-lg">
+                    <div class="relative overflow-hidden h-64">
+                        <img src="https://page.genspark.site/v1/base64_upload/ab39fc78ef38e0b5f0dea8a4b54f4392" alt="Zahara Jewelry Website" class="object-cover w-full h-full transition-transform duration-500 hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Zahara</h3>
+                        <p class="text-gray-700 mb-4">An e-commerce website for handmade jewelry, built using Webflow.</p>
+                        <div class="flex flex-wrap mb-4">
+                            <span class="bg-yellow-100 text-yellow-800 text-xs font-medium mr-2 mb-2 px-2.5 py-0.5 rounded">E-commerce</span>
+                            <span class="bg-yellow-100 text-yellow-800 text-xs font-medium mr-2 mb-2 px-2.5 py-0.5 rounded">Webflow</span>
+                            <span class="bg-yellow-100 text-yellow-800 text-xs font-medium mr-2 mb-2 px-2.5 py-0.5 rounded">UX Design</span>
+                        </div>
+                        <a href="#" class="text-sm font-medium inline-flex items-center hover:underline" style="color: var(--peach);">
+                            View Case Study
+                            <svg class="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 3 - HealthSync (Swapped with the image from Blog Post 1) -->
+                <div class="card overflow-hidden bg-white shadow-lg">
+                    <div class="relative overflow-hidden h-64">
+                        <img src="https://page.genspark.site/v1/base64_upload/c68e9c0694ebc4d546909517d3bef070" alt="HealthSync App" class="object-cover w-full h-full transition-transform duration-500 hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">HealthSync</h3>
+                        <p class="text-gray-700 mb-4">A mobile app for scheduling virtual doctor visits with simple UX for seniors.</p>
+                        <div class="flex flex-wrap mb-4">
+                            <span class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 mb-2 px-2.5 py-0.5 rounded">Healthcare</span>
+                            <span class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 mb-2 px-2.5 py-0.5 rounded">Accessibility</span>
+                            <span class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 mb-2 px-2.5 py-0.5 rounded">Adobe XD</span>
+                        </div>
+                        <a href="#" class="text-sm font-medium inline-flex items-center hover:underline" style="color: var(--peach);">
+                            View Case Study
+                            <svg class="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="blog" class="py-20 cream-bg section">
+        <div class="container mx-auto px-4 md:px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold mb-2">Design Blog</h2>
+                <div class="w-24 h-1 bg-peach mx-auto"></div>
+                <p class="mt-4 text-lg">Thoughts and insights on design</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Blog Post 1 (Swapped with the image from HealthSync) -->
+                <div class="card bg-white shadow-lg hover:shadow-xl transition-shadow">
+                    <div class="md:flex">
+                        <div class="md:flex-shrink-0">
+                            <img class="h-48 w-full object-cover md:w-48" src="https://page.genspark.site/v1/base64_upload/257268d6398e6c7d10ac7315403a39ca" alt="Blog Post Image">
+                        </div>
+                        <div class="p-6">
+                            <div class="uppercase tracking-wide text-sm font-semibold" style="color: var(--peach);">UI/UX Design</div>
+                            <a href="#" class="block mt-1 text-lg font-medium hover:underline">Design That Feels Like Home</a>
+                            <p class="mt-2">Why emotional design is the future of UI/UX. Creating interfaces that connect with users on a deeper level.</p>
+                            <div class="mt-4 flex items-center">
+                                <span class="text-sm">May 15, 2025</span>
+                                <span class="mx-2">•</span>
+                                <span class="text-sm">5 min read</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Blog Post 2 -->
+                <div class="card bg-white shadow-lg hover:shadow-xl transition-shadow">
+                    <div class="md:flex">
+                        <div class="md:flex-shrink-0">
+                            <img class="h-48 w-full object-cover md:w-48" src="https://page.genspark.site/v1/base64_upload/c629b9fc827ef2ed2ab624ae49ffead6" alt="Blog Post Image">
+                        </div>
+                        <div class="p-6">
+                            <div class="uppercase tracking-wide text-sm font-semibold" style="color: var(--peach);">Mobile Design</div>
+                            <a href="#" class="block mt-1 text-lg font-medium hover:underline">Beyond Responsive: Designing for the Mobile Era</a>
+                            <p class="mt-2">Strategies for creating mobile-first experiences that go beyond responsive design principles.</p>
+                            <div class="mt-4 flex items-center">
+                                <span class="text-sm">April 2, 2025</span>
+                                <span class="mx-2">•</span>
+                                <span class="text-sm">4 min read</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Read All Articles button removed as requested -->
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 lavender-bg section">
+        <div class="container mx-auto px-4 md:px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold mb-2">Get In Touch</h2>
+                <div class="w-24 h-1 bg-peach mx-auto"></div>
+                <p class="mt-4 text-lg">Let's discuss your next project</p>
+            </div>
+
+            <div class="flex justify-center">
+                <!-- Only keeping Contact Information as requested -->
+                <div class="md:w-2/3 lg:w-1/2">
+                    <div class="bg-white rounded-lg shadow-lg p-6 cream-bg">
+                        <h3 class="text-xl font-bold mb-4">Contact Information</h3>
+                        <div class="flex items-start mb-4">
+                            <div class="text-xl mr-4" style="color: var(--peach);"><i class="fas fa-envelope"></i></div>
+                            <div>
+                                <h4 class="font-medium">Email</h4>
+                                <p class="mt-1">amina.designs@gmail.com</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start mb-4">
+                            <div class="text-xl mr-4" style="color: var(--peach);"><i class="fas fa-map-marker-alt"></i></div>
+                            <div>
+                                <h4 class="font-medium">Location</h4>
+                                <p class="mt-1">Cairo, Egypt</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start mb-4">
+                            <div class="text-xl mr-4" style="color: var(--peach);"><i class="fab fa-linkedin"></i></div>
+                            <div>
+                                <h4 class="font-medium">LinkedIn</h4>
+                                <p class="mt-1">linkedin.com/in/aminasaleh</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="text-xl mr-4" style="color: var(--peach);"><i class="fab fa-instagram"></i></div>
+                            <div>
+                                <h4 class="font-medium">Instagram</h4>
+                                <p class="mt-1">@amina.designs</p>
+                            </div>
+                        </div>
+
+                        <h3 class="text-xl font-bold mt-8 mb-4">Available For</h3>
+                        <div class="flex flex-wrap">
+                            <span class="skill-pill">UI/UX Design</span>
+                            <span class="skill-pill">Website Design</span>
+                            <span class="skill-pill">Mobile App Design</span>
+                            <span class="skill-pill">Brand Identity</span>
+                            <span class="skill-pill">Design Consultancy</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Send Message form removed as requested -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-10 cream-bg">
+        <div class="container mx-auto px-4 md:px-6">
+            <div class="flex flex-col items-center">
+                <div class="text-2xl font-semibold mb-4">
+                    <span class="text-3xl">Amina</span> 
+                    <span class="text-2xl" style="color: var(--peach);">Saleh</span>
+                </div>
+                <div class="flex space-x-6 mb-6">
+                    <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-behance"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-dribbble"></i></a>
+                </div>
+                <div class="text-center">
+                    <p class="mb-4">© 2025 Amina Saleh. Made with ❤️ in Cairo.</p>
+                    <div class="flex justify-center space-x-4">
+                        <a href="#" class="text-sm hover:underline">Terms of Service</a>
+                        <a href="#" class="text-sm hover:underline">Privacy Policy</a>
+                        <a href="#" class="text-sm hover:underline">Sitemap</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scrolling effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('shadow-lg');
+                navbar.style.padding = '0.5rem 0';
+            } else {
+                navbar.classList.remove('shadow-lg');
+                navbar.style.padding = '1rem 0';
+            }
+        });
+
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking on a link
+        const mobileLinks = document.querySelectorAll('#mobile-menu a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Section reveal animation
+        const sections = document.querySelectorAll('.section');
+        const revealSection = () => {
+            sections.forEach(section => {
+                const sectionTop = section.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                if (sectionTop < windowHeight * 0.8) {
+                    section.classList.add('visible');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', revealSection);
+        window.addEventListener('load', revealSection);
+
+        // Initialize progress bars animation
+        const progressBars = document.querySelectorAll('.progress-fill');
+        
+        const animateProgressBars = () => {
+            progressBars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0';
+                setTimeout(() => {
+                    bar.style.width = width;
+                }, 300);
+            });
+        };
+
+        // Theme toggle functionality
+        function toggleTheme() {
+            document.body.classList.toggle('dark');
+            const themeIcon = document.querySelector("#theme-toggle i");
+            
+            if (document.body.classList.contains('dark')) {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        // Check for saved theme preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            document.body.classList.add('dark');
+            const themeIcon = document.querySelector("#theme-toggle i");
+            themeIcon.classList.remove('fa-moon');
+            themeIcon.classList.add('fa-sun');
+        }
+
+        // Animate skills when skills section becomes visible
+        const skillsSection = document.getElementById('skills');
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.5
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateProgressBars();
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        observer.observe(skillsSection);
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
